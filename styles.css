@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .clock {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-gap: 10px;
+    text-align: center;
+  }
+  
+  .word {
+    opacity: 0.2;
+    font-size: 2em;
+    transition: opacity 0.5s;
+  }
+  
+  .word.active {
+    opacity: 1;
+  }
+  
