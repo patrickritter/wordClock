@@ -1,20 +1,23 @@
 body {
+  width: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100vh; /* Ersatz für height: 100vh */
   background-color: #333;
   color: #fff;
+  overflow-x: hidden; /* Scrollen verhindern */
 }
 
 .clock {
+  max-width: 100%; /* Verhindert Überlauf über den Bildschirmrand hinaus */
+  width: 100%; /* Option, um sicherzustellen, dass sie nie größer als der Bildschirm ist */
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-auto-rows: minmax(50px, auto);
   gap: 5px;
-  max-width: 90%;
 }
 
 .row {
@@ -40,7 +43,7 @@ body {
 /* Adjustments for small screens */
 @media (max-width: 400px) {
   .clock {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .word {
