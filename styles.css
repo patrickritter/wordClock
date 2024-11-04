@@ -5,15 +5,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ersatz für height: 100vh */
+  min-height: 100vh;
   background-color: #333;
   color: #fff;
-  overflow-x: hidden; /* Scrollen verhindern */
+  overflow-x: hidden;
 }
 
 .clock {
-  max-width: 100%; /* Verhindert Überlauf über den Bildschirmrand hinaus */
-  width: 100%; /* Option, um sicherzustellen, dass sie nie größer als der Bildschirm ist */
+  max-width: 100%;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-auto-rows: minmax(50px, auto);
@@ -21,7 +20,7 @@ body {
 }
 
 .row {
-  display: contents; /* Maintain grid layout */
+  display: contents;
 }
 
 .word {
@@ -40,6 +39,18 @@ body {
   opacity: 1;
 }
 
+/* Adjustments for very small screens */
+@media (max-width: 350px) {
+  .clock {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .word {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+}
+
 /* Adjustments for small screens */
 @media (max-width: 400px) {
   .clock {
@@ -54,7 +65,7 @@ body {
 
 @media (max-width: 600px) {
   .clock {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 6px;
   }
 
@@ -67,7 +78,7 @@ body {
 /* Tablet devices */
 @media (max-width: 800px) {
   .clock {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
   }
 
   .word {
