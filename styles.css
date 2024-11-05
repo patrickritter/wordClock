@@ -66,7 +66,7 @@ body {
 /* Zusätzliche Anpassungen für kleinere Bildschirme */
 @media (max-width: 400px) and (orientation: portrait) {
   .clock {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .word {
