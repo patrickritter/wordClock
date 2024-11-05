@@ -39,34 +39,10 @@ body {
   opacity: 1;
 }
 
-/* Adjustments for very small screens */
-@media (max-width: 350px) {
+/* Hochformat (Portrait) */
+@media (orientation: portrait) {
   .clock {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .word {
-    font-size: 0.8rem;
-    padding: 5px;
-  }
-}
-
-/* Adjustments for small screens */
-@media (max-width: 400px) {
-  .clock {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .word {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-}
-
-@media (max-width: 600px) {
-  .clock {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr); /* Weniger Spalten im Hochformat */
   }
 
   .word {
@@ -75,26 +51,26 @@ body {
   }
 }
 
-/* Tablet devices */
-@media (max-width: 800px) {
+/* Querformat (Landscape) */
+@media (orientation: landscape) {
   .clock {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .word {
-    font-size: 1.2rem;
-    padding: 8px;
-  }
-}
-
-/* Desktop screens */
-@media (min-width: 801px) {
-  .clock {
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(10, 1fr); /* Mehr Spalten im Querformat */
   }
 
   .word {
     font-size: 1.5rem;
     padding: 10px;
+  }
+}
+
+/* Zusätzliche Anpassungen für kleinere Bildschirme */
+@media (max-width: 400px) and (orientation: portrait) {
+  .clock {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .word {
+    font-size: 0.9rem;
+    padding: 5px;
   }
 }
