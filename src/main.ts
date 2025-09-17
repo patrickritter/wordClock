@@ -23,6 +23,8 @@ const HOUR_WORDS: HourWords = {
  * Aktualisiert die Wortuhr-Anzeige basierend auf der aktuellen Zeit
  */
 function updateClock(): void {
+  if (typeof document === 'undefined') return
+
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
@@ -48,6 +50,8 @@ function updateClock(): void {
  * Aktualisiert die Minuten-Anzeige
  */
 function updateMinutes(minutes: number): void {
+  if (typeof document === 'undefined') return
+
   if (minutes >= 0 && minutes < 5) {
     document.getElementById('uhr')?.classList.add('active');
   } else if (minutes >= 5 && minutes < 10) {
@@ -109,6 +113,8 @@ function calculateDisplayHours(hours: number, minutes: number): number {
  * Aktualisiert die Stunden-Anzeige
  */
 function updateHours(hours: number): void {
+  if (typeof document === 'undefined') return
+
   const hourWord = HOUR_WORDS[hours];
   if (hourWord) {
     document.getElementById(hourWord)?.classList.add('active');
@@ -119,6 +125,11 @@ function updateHours(hours: number): void {
  * Test-Funktion für spezifische Zeiten
  */
 export function testTime(hours: number, minutes: number): void {
+  if (typeof document === 'undefined') {
+    console.warn('testTime requires a DOM environment');
+    return;
+  }
+
   // Vorherige Highlights entfernen
   document.querySelectorAll('.word').forEach(word => {
     word.classList.remove('active');
@@ -137,13 +148,15 @@ export function testTime(hours: number, minutes: number): void {
 }
 
 // Event Listeners
-document.addEventListener('DOMContentLoaded', () => {
-  // Initiale Anzeige
-  updateClock();
-  
-  // Alle 60 Sekunden aktualisieren
-  setInterval(updateClock, 60000);
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initiale Anzeige
+    updateClock();
+    
+    // Alle 60 Sekunden aktualisieren
+    setInterval(updateClock, 60000);
+  });
+}
 
 // Export für Tests
 export { updateClock, updateMinutes, updateHours, calculateDisplayHours };

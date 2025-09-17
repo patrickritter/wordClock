@@ -1,7 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { calculateDisplayHours, updateMinutes, updateHours } from '../main'
 
+const hasDom = typeof document !== 'undefined'
+
 const setupWordClockDom = (): void => {
+  if (!hasDom) return
+
   document.body.innerHTML = `
     <div class="clock">
       <div class="row">
@@ -50,28 +54,31 @@ const setupWordClockDom = (): void => {
 }
 
 const isActive = (id: string): boolean => {
+  if (!hasDom) return false
   return document.getElementById(id)?.classList.contains('active') ?? false
 }
 
-describe('Wortuhr Tests', () => {
-  beforeEach(() => {
-    setupWordClockDom()
+describe('Stunden-Berechnung', () => {
+  it('sollte korrekte Stunden für verschiedene Zeiten berechnen', () => {
+    expect(calculateDisplayHours(1, 0)).toBe(1)
+    expect(calculateDisplayHours(12, 0)).toBe(12)
+    expect(calculateDisplayHours(22, 20)).toBe(10) // 22:20 -> 10 Uhr
+    expect(calculateDisplayHours(0, 30)).toBe(1) // 00:30 -> 1 Uhr (halb eins)
+    expect(calculateDisplayHours(23, 30)).toBe(12) // 23:30 -> 12 Uhr
   })
 
-  describe('Stunden-Berechnung', () => {
-    it('sollte korrekte Stunden für verschiedene Zeiten berechnen', () => {
-      expect(calculateDisplayHours(1, 0)).toBe(1)
-      expect(calculateDisplayHours(12, 0)).toBe(12)
-      expect(calculateDisplayHours(22, 20)).toBe(10) // 22:20 -> 10 Uhr
-      expect(calculateDisplayHours(0, 30)).toBe(1) // 00:30 -> 1 Uhr (halb eins)
-      expect(calculateDisplayHours(23, 30)).toBe(12) // 23:30 -> 12 Uhr
-    })
+  it('sollte nächste Stunde bei Minuten >= 25 anzeigen', () => {
+    expect(calculateDisplayHours(10, 25)).toBe(11)
+    expect(calculateDisplayHours(10, 30)).toBe(11)
+    expect(calculateDisplayHours(10, 35)).toBe(11)
+  })
+})
 
-    it('sollte nächste Stunde bei Minuten >= 25 anzeigen', () => {
-      expect(calculateDisplayHours(10, 25)).toBe(11)
-      expect(calculateDisplayHours(10, 30)).toBe(11)
-      expect(calculateDisplayHours(10, 35)).toBe(11)
-    })
+const describeDom = hasDom ? describe : describe.skip
+
+describeDom('Wortuhr DOM-Interaktionen', () => {
+  beforeEach(() => {
+    setupWordClockDom()
   })
 
   describe('Minuten-Logik', () => {
