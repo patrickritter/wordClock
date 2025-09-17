@@ -16,13 +16,13 @@ class TestFramework {
     }
   }
 
-  assertEquals(actual: any, expected: any, message: string): void {
+  assertEquals<T>(actual: T, expected: T, message: string): void {
     if (actual !== expected) {
       throw new Error(`${message} - Expected: ${expected}, Actual: ${actual}`)
     }
   }
 
-  assertArrayEquals(actual: any[], expected: any[], message: string): void {
+  assertArrayEquals<T>(actual: T[], expected: T[], message: string): void {
     if (JSON.stringify(actual) !== JSON.stringify(expected)) {
       throw new Error(`${message} - Expected: ${JSON.stringify(expected)}, Actual: ${JSON.stringify(actual)}`)
     }

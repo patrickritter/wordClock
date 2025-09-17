@@ -17,8 +17,8 @@ global.document = {
     }
     return mockElements[id]
   }),
-  querySelectorAll: vi.fn(() => [])
-} as any
+  querySelectorAll: vi.fn(() => [] as unknown as NodeListOf<Element>)
+} as unknown as Document
 
 describe('Wortuhr Tests', () => {
   beforeEach(() => {
@@ -109,7 +109,7 @@ describe('Wortuhr Tests', () => {
   describe('Vollständige Zeit-Tests', () => {
     it('sollte 14:00 korrekt anzeigen', () => {
       // Mock querySelectorAll für updateClock
-      global.document.querySelectorAll = vi.fn(() => [] as any)
+      global.document.querySelectorAll = vi.fn(() => [] as unknown as NodeListOf<Element>)
       
       // Test 14:00
       updateMinutes(0)
